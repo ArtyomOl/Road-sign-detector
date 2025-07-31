@@ -1,0 +1,11 @@
+torchvision
+torchaudio
+pandas
+numpy
+pydantic==2.5.3
+scikit-learn
+opencv-python-headless
+albumentations
+tqdm
+tensorboard
+timm  # PyTorch Image Models
