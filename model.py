@@ -4,9 +4,6 @@ import timm
 from config import config
 
 def create_model() -> nn.Module:
-    """
-    Создает модель CNN с предобученными весами и заменяет классификатор.
-    """
     model = timm.create_model(
         config.train.model_name,
         pretrained=config.train.pretrained,

@@ -1,8 +1,6 @@
 # predict.py
 import torch
 import cv2
-import argparse
-from PIL import Image
 import torch.nn.functional as F
 
 from config import config
@@ -47,9 +45,6 @@ def predict(model_path: str, image_path: str):
     print(f"Confidence: {confidence.item():.4f}")
 
 if __name__ == '__main__':
-    # parser = argparse.ArgumentParser(description="")
-    # parser.add_argument("image", type=str, help="D:\\archive\Meta\\1.png")
-    # parser.add_argument("--model", type=str, default=config.project.model_save_path, help="D:\\Python projects\\Road-sign-detector\\models\\best_model.pth")
-    # args = parser.parse_args()
-    
-    predict("D:\\Python projects\\Road-sign-detector\\models\\best_model.pth", "D:\\archive\Meta\\9.png")
+    image_path = "D:\\archive\\Test\\01179.png"
+
+    predict("D:\\Python projects\\Road-sign-detector\\models\\best_model.pth", image_path)

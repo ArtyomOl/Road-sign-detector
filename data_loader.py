@@ -15,9 +15,9 @@ from config import config
 def get_train_transforms(img_size: Tuple[int, int]) -> A.Compose:
     return A.Compose([
         A.Resize(height=img_size[0], width=img_size[1]),
-        A.ShiftScaleRotate(shift_limit=0.05, scale_limit=0.05, rotate_limit=15, p=0.5),
+        A.ShiftScaleRotate(shift_limit=0.05, scale_limit=0.05, rotate_limit=30, p=0.5),
         A.RandomBrightnessContrast(p=0.5),
-        A.RGBShift(r_shift_limit=15, g_shift_limit=15, b_shift_limit=15, p=0.5),
+        A.RGBShift(r_shift_limit=25, g_shift_limit=25, b_shift_limit=25, p=0.5),
         A.CoarseDropout(max_holes=8, max_height=8, max_width=8, min_holes=1, min_height=1, min_width=1, fill_value=0, p=0.5),
         A.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
         ToTensorV2(),
@@ -52,9 +52,6 @@ class GTSRBDataset(Dataset):
         return image, label
 
 def create_dataloaders() -> Dict[str, DataLoader]:
-    """
-    Загружает данные, разделяет их и создает DataLoader'ы для train, val и test.
-    """
     # 1. Загрузка train/val данных из папок
     train_image_paths = []
     train_labels = []
@@ -81,7 +78,7 @@ def create_dataloaders() -> Dict[str, DataLoader]:
             X_train, y_train,
             train_size=config.train.train_subset_fraction,
             random_state=42,
-            stratify=y_train  # КРИТИЧЕСКИ ВАЖНО для сохранения баланса классов в подвыборке
+            stratify=y_train
         )
 
     
@@ -137,7 +134,6 @@ def create_dataloaders() -> Dict[str, DataLoader]:
     return {"train": train_loader, "val": val_loader, "test": test_loader}
 
 def get_class_names() -> Dict[int, str]:
-    """Загружает маппинг ID класса в имя."""
-    # df = pd.read_csv(config.data.class_names_path)
-    # return dict(zip(df.ClassId, df.SignName))
-    return {i: i for i in range(43)}
+    df = pd.read_csv(config.data.class_names_path)
+    return dict(zip(df.ClassId, df.SignName))
+    # return {i: i for i in range(43)}

@@ -21,7 +21,6 @@ class TrainConfig(BaseModel):
     test_split_size: float = 0.2
     train_subset_fraction: float = Field(0.1, ge=0.01, le=1.0)
 
-
 class ProjectConfig(BaseModel):
     model_config = ConfigDict(protected_namespaces=())
     project_name: str = "Road-sign-detector"

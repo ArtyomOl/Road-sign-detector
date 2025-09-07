@@ -1,4 +1,3 @@
-# trainer.py
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -6,7 +5,6 @@ from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
 from tqdm import tqdm
 import time
-import os
 from typing import Dict
 
 from config import config

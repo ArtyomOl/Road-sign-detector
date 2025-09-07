@@ -1,11 +1,9 @@
-# train.py
 import torch
 import torch.nn as nn
 import torch.optim as optim
 from torch.utils.tensorboard import SummaryWriter
 import os
 from sklearn.metrics import classification_report
-import numpy as np
 from tqdm import tqdm
 
 from config import config
